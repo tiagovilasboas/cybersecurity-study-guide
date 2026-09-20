@@ -43,7 +43,8 @@ func main() {
 	for i, v := range scenario.Vulnerabilities {
 		fmt.Printf("%d. **%s**\n   - Risk: %s\n   - Control: %s\n   - Frequency: %s\n   - Why it helps: %s\n\n", i+1, v.Name, v.Risk, v.Control, v.Frequency, v.Effect)
 	}
-	fmt.Println("## Selected methods (up to three)\n")
+	fmt.Println("## Selected methods (up to three)")
+	fmt.Println()
 	for i, v := range scenario.Vulnerabilities {
 		if i == 3 {
 			break
