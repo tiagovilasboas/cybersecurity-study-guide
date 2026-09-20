@@ -2,56 +2,102 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
-type Vulnerability struct {
-	Name      string `json:"name"`
-	Risk      string `json:"risk"`
-	Control   string `json:"control"`
-	Frequency string `json:"frequency"`
-	Effect    string `json:"effect"`
+type Finding struct {
+	ID             string   `json:"id"`
+	Title          string   `json:"title"`
+	Severity       string   `json:"severity"`
+	Evidence       []string `json:"evidence"`
+	Risk           string   `json:"risk"`
+	Recommendation string   `json:"recommendation"`
+	Cadence        string   `json:"cadence"`
+	Validation     []string `json:"validation"`
 }
 
-type Scenario struct {
-	Name            string          `json:"name"`
-	Vulnerabilities []Vulnerability `json:"vulnerabilities"`
+type ReportInput struct {
+	Title    string    `json:"title"`
+	Context  string    `json:"context"`
+	Findings []Finding `json:"findings"`
 }
 
 func main() {
-	path := "labs/go/network-hardening/scenario.json"
-	if len(os.Args) > 1 {
-		path = os.Args[1]
-	}
-	data, err := os.ReadFile(path)
+	inputPath := flag.String("input", "labs/go/network-hardening/scenario.json", "path to report input JSON")
+	format := flag.String("format", "markdown", "output format: markdown or json")
+	flag.Parse()
+
+	data, err := os.ReadFile(*inputPath)
 	if err != nil {
 		fail(err)
 	}
-	var scenario Scenario
-	if err := json.Unmarshal(data, &scenario); err != nil {
+	var input ReportInput
+	if err := json.Unmarshal(data, &input); err != nil {
 		fail(err)
 	}
-	if len(scenario.Vulnerabilities) == 0 {
-		fail(fmt.Errorf("scenario has no vulnerabilities"))
+	if err := validate(input); err != nil {
+		fail(err)
 	}
 
-	fmt.Println("# Network Hardening Security Risk Assessment")
-	fmt.Println()
-	fmt.Println("> Scenario-derived draft for review. Complete or adapt it before using it in the course activity.")
-	fmt.Printf("\nScenario: %s\n\n## Vulnerabilities and controls\n\n", scenario.Name)
-	for i, v := range scenario.Vulnerabilities {
-		fmt.Printf("%d. **%s**\n   - Risk: %s\n   - Control: %s\n   - Frequency: %s\n   - Why it helps: %s\n\n", i+1, v.Name, v.Risk, v.Control, v.Frequency, v.Effect)
-	}
-	fmt.Println("## Selected methods (up to three)")
-	fmt.Println()
-	for i, v := range scenario.Vulnerabilities {
-		if i == 3 {
-			break
+	switch strings.ToLower(*format) {
+	case "markdown", "md":
+		writeMarkdown(input)
+	case "json":
+		out, err := json.MarshalIndent(input, "", "  ")
+		if err != nil {
+			fail(err)
 		}
-		fmt.Printf("%d. %s\n", i+1, v.Control)
+		fmt.Println(string(out))
+	default:
+		fail(fmt.Errorf("unsupported format %q", *format))
 	}
-	fmt.Println("\n## Validation evidence\n\n- Review configuration evidence for each selected control.\n- Confirm access logs and change records show the control is active.\n- Repeat the review at the frequency defined for each control.")
+}
+
+func validate(input ReportInput) error {
+	if strings.TrimSpace(input.Title) == "" {
+		return fmt.Errorf("title is required")
+	}
+	if len(input.Findings) == 0 {
+		return fmt.Errorf("at least one finding is required")
+	}
+	for i, f := range input.Findings {
+		if f.ID == "" || f.Title == "" {
+			return fmt.Errorf("finding %d requires id and title", i+1)
+		}
+		if len(f.Evidence) == 0 {
+			return fmt.Errorf("finding %q requires evidence", f.ID)
+		}
+		if f.Recommendation == "" || f.Cadence == "" {
+			return fmt.Errorf("finding %q requires recommendation and cadence", f.ID)
+		}
+	}
+	return nil
+}
+
+func writeMarkdown(input ReportInput) {
+	fmt.Printf("# %s\n\n", input.Title)
+	if input.Context != "" {
+		fmt.Printf("> %s\n\n", input.Context)
+	}
+	fmt.Println("## Findings and conditional recommendations\n")
+	for i, f := range input.Findings {
+		fmt.Printf("%d. **%s** (%s)\n", i+1, f.Title, f.Severity)
+		fmt.Println("   - Evidence:")
+		for _, e := range f.Evidence {
+			fmt.Printf("     - %s\n", e)
+		}
+		fmt.Printf("   - Risk: %s\n", f.Risk)
+		fmt.Printf("   - Recommendation: %s\n", f.Recommendation)
+		fmt.Printf("   - Cadence: %s\n", f.Cadence)
+		fmt.Println("   - Validation:")
+		for _, v := range f.Validation {
+			fmt.Printf("     - %s\n", v)
+		}
+		fmt.Println()
+	}
 }
 
 func fail(err error) { fmt.Fprintf(os.Stderr, "error: %v\n", err); os.Exit(1) }
