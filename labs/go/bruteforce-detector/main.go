@@ -13,7 +13,7 @@ const threshold = 3
 
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "uso: go run . caminho-do-log\\n")
+		fmt.Fprintf(os.Stderr, "uso: go run . caminho-do-log\n")
 		os.Exit(2)
 	}
 
@@ -25,7 +25,7 @@ func main() {
 
 	for ip, count := range counts {
 		if count >= threshold {
-			fmt.Printf("alerta: %s teve %d tentativas de login com falha\\n", ip, count)
+			fmt.Printf("alerta: %s teve %d tentativas de login com falha\n", ip, count)
 		}
 	}
 }
