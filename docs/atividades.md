@@ -19,7 +19,7 @@ Este arquivo registra o que foi praticado e aprendido. Os textos são autorais e
 - A documentação deve registrar quem foi afetado, como o incidente foi descoberto, quais evidências existem e qual foi a sequência observada.
 - A correção deve reduzir tentativas automatizadas e impedir que uma senha padrão seja suficiente para comprometer a conta.
 
-**Status:** leitura concluída; relatório autoral em elaboração.
+**Status:** relatório autoral gerado; validação e envio continuam pendentes na Coursera.
 
 ## Estrutura usada para o relatório
 

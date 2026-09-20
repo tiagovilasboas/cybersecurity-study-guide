@@ -31,6 +31,21 @@ Não registramos uma atividade como correta apenas porque o texto foi escrito. O
 
 Evite métricas de vaidade, como quantidade de páginas ou linhas escritas. O indicador mais importante é a combinação entre evidência, validação e aprendizado demonstrável.
 
+## Evidências deste repositório
+
+| Registro | Origem | O que prova | Limite |
+| --- | --- | --- | --- |
+| `docs/atividades.md` | cenário e materiais da Coursera | compreensão do caso e dos critérios | não prova envio ou nota |
+| `relatorio.md` | gerado pelo programa em Go | relatório estruturado para revisão | não substitui a entrega oficial |
+| `labs/go/bruteforce-detector/sample.log` | exemplo autoral | entrada reproduzível do detector | não é log real do curso |
+| `docs/resultados-execucao.md` | execução local | comando e saída observados | não é métrica de produção |
+
+O relatório mistura contexto conhecido do caso com uma evidência calculada pelo detector. A parte dinâmica é recalculada sempre que outro log é informado:
+
+```bash
+go run ./labs/go/incident-report caminho/para/log | tee relatorio.md
+```
+
 ## Como atualizar
 
 Para cada atividade concluída, registre:

@@ -19,13 +19,25 @@ Hardening é como preparar uma casa antes de uma viagem: fechar entradas desnece
 | Revisão | conectar controles, evidências e decisões | [trajetória](docs/trajetoria.md) |
 | Evidências | métricas, critérios e fonte de validação | [matriz de evidências](docs/evidencias-e-metricas.md) |
 
+## Evidências e limites
+
+Este repositório separa três tipos de registro:
+
+- **Evidência do curso:** cenário, protocolos e critérios descritos nos materiais oficiais da Coursera.
+- **Evidência autoral:** análise escrita, checklist e relatório produzido para consolidar o aprendizado.
+- **Evidência executável:** resultados calculados pelos programas em Go a partir de um log local de exemplo.
+
+O laboratório em Go é reproduzível, mas o `sample.log` é sintético. Ele demonstra o detector e não deve ser apresentado como captura real do ambiente da Coursera. Progresso, nota, conclusão e certificado continuam sendo confirmados na plataforma oficial.
+
 ## O que fica registrado
 
 - resumos em linguagem simples;
 - atividades descritas como estudos de caso, sem respostas copiadas;
 - checklists reutilizáveis em projetos próprios;
 - trade-offs: segurança, disponibilidade, custo, operação e experiência do usuário;
-- dúvidas e decisões que ajudam a transformar teoria em prática.
+- dúvidas e decisões que ajudam a transformar teoria em prática;
+- [rascunho gerado do relatório](relatorio.md);
+- [resultados de execução](docs/resultados-execucao.md).
 
 ## Fontes oficiais
 
@@ -36,7 +48,7 @@ Hardening é como preparar uma casa antes de uma viagem: fechar entradas desnece
 
 ## Status
 
-Curso em andamento. O módulo de proteção do sistema operacional já teve os vídeos e a leitura concluídos; a atividade prática de investigação de incidente está sendo elaborada.
+A documentação e os laboratórios autorais estão registrados. A validação da atividade, o progresso e a conclusão do curso devem ser confirmados na Coursera.
 
 ## Licença
 
