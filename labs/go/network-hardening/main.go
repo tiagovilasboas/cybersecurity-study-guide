@@ -82,7 +82,8 @@ func writeMarkdown(input ReportInput) {
 	if input.Context != "" {
 		fmt.Printf("> %s\n\n", input.Context)
 	}
-	fmt.Println("## Findings and conditional recommendations\n")
+	fmt.Println("## Findings and conditional recommendations")
+	fmt.Println()
 	for i, f := range input.Findings {
 		fmt.Printf("%d. **%s** (%s)\n", i+1, f.Title, f.Severity)
 		fmt.Println("   - Evidence:")
