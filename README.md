@@ -37,7 +37,8 @@ O laboratório em Go é reproduzível, mas o `sample.log` é sintético. Ele dem
 - trade-offs: segurança, disponibilidade, custo, operação e experiência do usuário;
 - dúvidas e decisões que ajudam a transformar teoria em prática;
 - [rascunho gerado do relatório](relatorio.md);
-- [resultados de execução](docs/resultados-execucao.md).
+- [resultados de execução](docs/resultados-execucao.md);
+- [passo a passo e laboratórios analisados](docs/atividades.md).
 
 ## Fontes oficiais
 
