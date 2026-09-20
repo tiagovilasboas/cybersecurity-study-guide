@@ -1,0 +1,9 @@
+{
+  "name": "Social media organization network hardening",
+  "vulnerabilities": [
+    {"name":"Shared employee passwords","risk":"Accountability is lost and one leaked password can expose multiple accounts.","control":"Unique accounts with strong password policy and MFA.","frequency":"Enforce continuously; review access monthly.","effect":"Reduces credential reuse and improves traceability of network access."},
+    {"name":"Default database administrator password","risk":"A known credential can provide direct privileged access to sensitive data.","control":"Replace the default secret with a unique managed credential and MFA.","frequency":"Change immediately; rotate and review regularly.","effect":"Removes an easily guessed entry point and limits privileged access."},
+    {"name":"Firewalls without ingress and egress rules","risk":"Unnecessary or malicious traffic can enter or leave the network.","control":"Implement deny-by-default firewall rules with documented exceptions.","frequency":"Review monthly and after every network change.","effect":"Reduces the exposed attack surface and limits lateral movement and exfiltration."},
+    {"name":"No multifactor authentication","risk":"A stolen password may be enough to access the network.","control":"Require MFA for administrative and remote network access.","frequency":"Enforce continuously; audit adoption monthly.","effect":"Adds an independent verification factor beyond the password."}
+  ]
+}
