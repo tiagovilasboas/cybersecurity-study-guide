@@ -17,6 +17,7 @@ Hardening é como preparar uma casa antes de uma viagem: fechar entradas desnece
 | Rede | redução de exposição e controles de comunicação | [checklist](docs/checklist-hardening.md) |
 | Nuvem | identidade, configuração e responsabilidade compartilhada | [checklist](docs/checklist-hardening.md) |
 | Revisão | conectar controles, evidências e decisões | [trajetória](docs/trajetoria.md) |
+| Evidências | métricas, critérios e fonte de validação | [matriz de evidências](docs/evidencias-e-metricas.md) |
 
 ## O que fica registrado
 
