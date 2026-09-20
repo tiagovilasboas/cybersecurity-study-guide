@@ -5,7 +5,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(`# Rascunho — Security Incident Report
+	fmt.Print(`# Rascunho — Security Incident Report
 
 > Complete os campos com suas próprias palavras antes de usar este material na atividade.
 
